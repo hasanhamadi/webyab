@@ -53,7 +53,7 @@ class BannerIndicator extends StatelessWidget {
                       'سایت‌های آگهی شده',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: 17,
                         color: Color(0xFF0D1B2A),
                       ),
                     ),
