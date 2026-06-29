@@ -1,17 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:webyab/banner_repository.dart';
-import 'package:webyab/bloc/banner_bloc.dart';
-import 'package:webyab/home_screen.dart';
-
-/// Banner
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-/// Web
+import 'package:webyab/banner/banner_repository.dart';
+import 'package:webyab/banner/bloc/banner_bloc.dart';
 
+import 'package:webyab/web/web_repository.dart';
 import 'package:webyab/web/bloc/web_bloc.dart';
-import 'package:webyab/web_repository.dart';
+
+import 'package:webyab/webshop/web_shop_repository.dart';
+import 'package:webyab/webshop/bloc/webshop_bloc.dart';
+
+import 'package:webyab/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,11 +25,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        /// Banner Bloc
+        /// Banner
         BlocProvider(create: (_) => BannerBloc(BannerRepository(Dio()))),
 
-        /// Web Bloc
+        /// Web
         BlocProvider(create: (_) => WebBloc(WebRepository())),
+
+        /// Web Shop
+        BlocProvider(create: (_) => WebShopBloc(WebShopRepository())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,7 +43,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

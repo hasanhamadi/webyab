@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'api_url.dart';
+import '../api_url.dart';
 import 'banner_model.dart';
 
 class BannerRepository {

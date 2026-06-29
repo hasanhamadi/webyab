@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:webyab/web_repository.dart';
+import 'package:webyab/web/web_repository.dart';
 
 import 'web_event.dart';
 import 'web_state.dart';

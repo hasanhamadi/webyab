@@ -1,27 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webyab/web/web_model.dart';
+import 'package:webyab/webshop/web_shop_model.dart';
 
-class WebCard extends StatelessWidget {
-  final WebModel web;
+class WebShopCard extends StatelessWidget {
+  final WebShopModel shop;
 
-  const WebCard({super.key, required this.web});
+  const WebShopCard({super.key, required this.shop});
 
   Future<void> _launchWebsite(BuildContext context) async {
-    if (web.url.isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("لینک سایت موجود نیست")));
-      return;
-    }
+    final Uri uri = Uri.parse(shop.url);
 
-    final Uri uri = Uri.parse(web.url);
+    final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
 
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
+    if (!launched && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("امکان باز کردن سایت وجود ندارد")),
+        const SnackBar(content: Text("امکان باز کردن سایت وجود ندارد.")),
       );
     }
   }
@@ -47,19 +41,27 @@ class WebCard extends StatelessWidget {
 
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: web.icon.isEmpty
+                    child: shop.icon.isEmpty
                         ? Container(
                             width: 70,
                             height: 70,
                             color: Colors.grey.shade200,
                             child: const Icon(Icons.language, size: 36),
                           )
-                        : Image.network(
-                            web.imageUrl,
+                        : CachedNetworkImage(
+                            imageUrl: shop.imageUrl,
                             width: 70,
                             height: 70,
                             fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) {
+                            placeholder: (context, url) => Container(
+                              width: 70,
+                              height: 70,
+                              alignment: Alignment.center,
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 2,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) {
                               return Container(
                                 width: 70,
                                 height: 70,
@@ -73,7 +75,7 @@ class WebCard extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   Text(
-                    web.name,
+                    shop.name,
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -87,7 +89,7 @@ class WebCard extends StatelessWidget {
                   const SizedBox(height: 6),
 
                   Text(
-                    web.domain,
+                    shop.domain,
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -116,26 +118,6 @@ class WebCard extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-            ),
-          ),
-
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: Color(0xFF453EFA),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Text(
-                "ویژه",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                ),
               ),
             ),
           ),

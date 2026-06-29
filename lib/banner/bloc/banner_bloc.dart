@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:webyab/banner_model.dart';
-import 'package:webyab/banner_repository.dart';
+import 'package:webyab/banner/banner_model.dart';
+import 'package:webyab/banner/banner_repository.dart';
 
 part 'banner_event.dart';
 part 'banner_state.dart';

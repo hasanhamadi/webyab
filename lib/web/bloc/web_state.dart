@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:webyab/web_model.dart';
+import 'package:webyab/web/web_model.dart';
 
 abstract class WebState extends Equatable {
   const WebState();

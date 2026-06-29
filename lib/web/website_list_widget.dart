@@ -5,7 +5,7 @@ import 'package:webyab/web/bloc/web_event.dart';
 import 'package:webyab/web/bloc/web_state.dart';
 import 'package:webyab/web/web_card.dart';
 
-import 'package:webyab/web_repository.dart';
+import 'package:webyab/web/web_repository.dart';
 
 class WebsiteListWidget extends StatelessWidget {
   const WebsiteListWidget({super.key});
@@ -31,7 +31,7 @@ class WebsiteListWidget extends StatelessWidget {
 
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 1),
               itemCount: state.websites.length,
               itemBuilder: (context, index) {
                 return SizedBox(

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../bloc/banner_bloc.dart';
+import 'bloc/banner_bloc.dart';
 import 'banner_card.dart';
 import 'banner_indicator.dart';
 
